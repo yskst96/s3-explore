@@ -39,6 +39,8 @@ const s3list = async (prefix?: string) => {
         objects.push({ key: p.Prefix, isFile: false })
     }
 
+    console.log(objects);
+
     return objects
 
 }

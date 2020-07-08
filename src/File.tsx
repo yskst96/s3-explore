@@ -1,13 +1,10 @@
 import React from 'react';
+import { CompositionProps } from './Composition';
 
-type Props = {
-  object: AWS.S3.Object;
+const File: React.FC<CompositionProps> = ({ object }) => {
+  const fileName = object.key;
+
+  return <div className='composition'>File:{fileName}</div>;
 };
 
-const File: React.FC<Props> = ({ object }) => {
-  const fileName = object.Key?.split('/').slice(-1)[0];
-
-  return <div>{fileName}</div>;
-};
-
-export default File;
+export { File };

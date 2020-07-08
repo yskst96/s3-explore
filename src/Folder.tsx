@@ -1,14 +1,10 @@
 import React from 'react';
-import AWS from 'aws-sdk';
+import { CompositionProps } from './Composition';
 
-type Props = {
-  object: AWS.S3.Object;
-};
+const Folder: React.FC<CompositionProps> = ({ object, updateList }) => {
+  const folderName = object.key.replace('/', '');
 
-const Folder: React.FC<Props> = ({ object }) => {
-  const folderName = object.Key?.split('/').slice(-1)[0];
-
-  return <div>{folderName}</div>;
+  return <div className='composition'>Folder:{folderName}</div>;
 };
 
 export default Folder;

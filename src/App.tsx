@@ -2,11 +2,17 @@ import React, { useEffect, useState } from 'react';
 import './App.css';
 
 import { s3list } from './aws';
-import { S3Object } from './Composition';
+import { S3Object, composition } from './Composition';
 
 const App: React.FC = () => {
   const [list, setList] = useState([] as S3Object[]);
   const [current, setCurrent] = useState('');
+
+  const updateList = async (prefix: string) => {
+    const list = await s3list(prefix);
+    setList(list);
+    setCurrent(current + prefix);
+  };
 
   useEffect(() => {
     let unmounted = false;
@@ -28,7 +34,7 @@ const App: React.FC = () => {
     <div className='App'>
       <div>current:{current ? current : '/'}</div>
       {list.map((o) => {
-        return <div key={o.key}>{o.key}</div>;
+        return <div key={o.key}>{composition(o)({ object: o, updateList })}</div>;
       })}
     </div>
   );
