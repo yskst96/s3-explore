@@ -3,6 +3,7 @@ import './App.css';
 
 import { s3list } from './aws';
 import { S3Object, composition } from './Composition';
+import { Upload } from './components/Upload';
 
 const App: React.FC = () => {
   const [list, setList] = useState([] as S3Object[]);
@@ -33,6 +34,10 @@ const App: React.FC = () => {
   return (
     <div className='App'>
       <div className='current-path'>current:{current ? current : '/'}</div>
+      <div>
+        <Upload current={current}></Upload>
+      </div>
+
       {list.map((o) => {
         return <div key={o.key}>{composition(o)({ object: o, current, updateList })}</div>;
       })}
