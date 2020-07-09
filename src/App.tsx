@@ -11,7 +11,7 @@ const App: React.FC = () => {
   const updateList = async (prefix: string) => {
     const list = await s3list(prefix);
     setList(list);
-    setCurrent(current + prefix);
+    setCurrent(prefix);
   };
 
   useEffect(() => {
@@ -32,9 +32,9 @@ const App: React.FC = () => {
 
   return (
     <div className='App'>
-      <div>current:{current ? current : '/'}</div>
+      <div className='current-path'>current:{current ? current : '/'}</div>
       {list.map((o) => {
-        return <div key={o.key}>{composition(o)({ object: o, updateList })}</div>;
+        return <div key={o.key}>{composition(o)({ object: o, current, updateList })}</div>;
       })}
     </div>
   );

@@ -1,7 +1,13 @@
 .App {
   text-align: center;
 }
+.current-path {
+  margin: 1rem 0;
+}
 
+.composition {
+  margin: 0.5rem 0;
+}
 .composition:hover {
   color: aqua;
   cursor: pointer;

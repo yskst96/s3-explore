@@ -48,13 +48,13 @@ const s3list = async (prefix?: string) => {
 const s3get = async (key: string) => {
     const res = await s3.getObject({ Bucket: BUCKET, Key: key }).promise()
     console.log(res);
-    //const obj = res.Body as Uint8Array
+    const obj = res.Body as Uint8Array
 
-    // const downLoadLink = document.createElement("a");
-    // downLoadLink.download = key
-    // downLoadLink.href = URL.createObjectURL(new Blob([obj.buffer]));
-    // downLoadLink.dataset.downloadurl = [downLoadLink.download, downLoadLink.href].join(":");
-    // downLoadLink.click();
+    const downLoadLink = document.createElement("a");
+    downLoadLink.download = key
+    downLoadLink.href = URL.createObjectURL(new Blob([obj.buffer]));
+    downLoadLink.dataset.downloadurl = [downLoadLink.download, downLoadLink.href].join(":");
+    downLoadLink.click();
 
 }
 
