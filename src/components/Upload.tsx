@@ -14,7 +14,9 @@ const Upload: React.FC<UploadProp> = ({ current }) => {
       input.click();
     }
   };
-  const upload = () => {};
+  const upload = () => {
+    console.log(inputRef.current?.value, inputRef.current?.files);
+  };
 
   return (
     <div>
