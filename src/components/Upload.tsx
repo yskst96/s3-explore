@@ -16,6 +16,29 @@ const Upload: React.FC<UploadProp> = ({ current }) => {
   };
   const upload = () => {
     console.log(inputRef.current?.value, inputRef.current?.files);
+
+    const files = inputRef.current?.files;
+
+    if (!files) return;
+
+    const file = files[0];
+
+    const reader = new FileReader();
+
+    reader.onload = (event: ProgressEvent<FileReader>) => {
+      const r = event.target?.result;
+
+      if (typeof r === 'string' || !r) return;
+
+      s3put(file.name, new Uint8Array(r));
+    };
+
+    reader.onerror = (event: ProgressEvent<FileReader>) => {
+      console.log('ERR', event.target?.error);
+      alert('アップロードに失敗しました');
+    };
+
+    reader.readAsArrayBuffer(file);
   };
 
   return (
