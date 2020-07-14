@@ -1,5 +1,5 @@
 import React, { useRef } from 'react';
-import { s3put } from '../aws';
+import { s3put } from '../util/aws';
 
 type UploadProp = {
   current: string;

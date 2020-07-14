@@ -1,5 +1,5 @@
-import { File } from "./components/File"
-import Folder from "./components/Folder"
+import { File } from "./File"
+import Folder from "./Folder"
 
 export type S3Object = {
     key: string

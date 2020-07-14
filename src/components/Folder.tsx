@@ -1,5 +1,5 @@
 import React from 'react';
-import { CompositionProps } from '../Composition';
+import { CompositionProps } from './Composition';
 
 const Folder: React.FC<CompositionProps> = ({ object, current, updateList }) => {
   const folderName = object.key.replace(current, '');

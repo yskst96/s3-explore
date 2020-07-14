@@ -1,5 +1,5 @@
 import AWS from "aws-sdk"
-import { S3Object } from "./Composition";
+import { S3Object } from "../components/Composition";
 
 const config = new AWS.Config(
     { accessKeyId: process.env.REACT_APP_KEY_ID, secretAccessKey: process.env.REACT_APP_SECRET_KEY, region: "ap-northeast-1" }
