@@ -1,0 +1,28 @@
+.App {
+  text-align: center;
+}
+.header {
+  display: flex;
+  justify-content: center;
+}
+.current-path {
+  margin: 1rem 0.5rem;
+}
+.refresh {
+  margin: 1rem 0.5rem;
+  cursor: pointer;
+}
+.refresh-icon {
+  vertical-align: bottom;
+}
+.composition {
+  margin: 0.5rem 0;
+}
+.composition:hover {
+  color: aqua;
+  cursor: pointer;
+}
+
+.upload-form {
+  display: none;
+}

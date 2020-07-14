@@ -1,15 +1,18 @@
 import React, { useEffect, useState } from 'react';
-import './App.css';
+import './css/App.css';
 
-import { s3list } from './aws';
-import { S3Object, composition } from './Composition';
+import { s3list } from './util/aws';
+import { S3Object, composition } from './components/Composition';
 import { Upload } from './components/Upload';
+import { Refresh } from './components/Refresh';
 
 const App: React.FC = () => {
   const [list, setList] = useState([] as S3Object[]);
   const [current, setCurrent] = useState('');
 
-  const updateList = async (prefix: string) => {
+  const updateList = async (prefix?: string) => {
+    prefix = prefix || '';
+
     const list = await s3list(prefix);
     setList(list);
     setCurrent(prefix);
@@ -33,7 +36,10 @@ const App: React.FC = () => {
 
   return (
     <div className='App'>
-      <div className='current-path'>current:{current ? current : '/'}</div>
+      <div className='header'>
+        <div className='current-path'>current:{current ? current : '/'}</div>
+        <Refresh updateList={updateList}></Refresh>
+      </div>
       <div>
         <Upload current={current}></Upload>
       </div>
