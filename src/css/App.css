@@ -8,6 +8,12 @@
 .current-path {
   margin: 1rem 0.5rem;
 }
+
+.object-container {
+  display: flex;
+  justify-content: center;
+  margin: 0.5rem 0;
+}
 .refresh {
   margin: 1rem 0.5rem;
   cursor: pointer;
@@ -15,9 +21,7 @@
 .refresh-icon {
   vertical-align: bottom;
 }
-.composition {
-  margin: 0.5rem 0;
-}
+
 .composition:hover {
   color: aqua;
   cursor: pointer;

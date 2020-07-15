@@ -1,10 +1,27 @@
 import React, { useEffect, useState } from 'react';
+import Modal from 'react-modal';
 import './css/App.css';
 
 import { s3list } from './util/aws';
 import { S3Object, composition } from './components/Composition';
 import { Upload } from './components/Upload';
 import { Refresh } from './components/Refresh';
+import { Delete } from './components/Delete';
+
+Modal.setAppElement('#root');
+const customStyles = {
+  content: {
+    top: '15%',
+    left: '50%',
+    right: 'auto',
+    bottom: 'auto',
+    marginRight: '-50%',
+    transform: 'translate(-50%, -50%)',
+  },
+  overlay: {
+    backgroundColor: 'rgba(0,0,0,.5)',
+  },
+};
 
 const App: React.FC = () => {
   const [list, setList] = useState([] as S3Object[]);
@@ -34,6 +51,24 @@ const App: React.FC = () => {
     };
   }, []);
 
+  const [deleteOpen, setDeleteOpen] = useState(false);
+  const [deleteTargets, setDeleteTargets] = useState([] as Array<string>);
+
+  const openDeleteModal = (target: string) => {
+    return () => {
+      setDeleteTargets([target]);
+      setDeleteOpen(true);
+      console.log('delete open');
+    };
+  };
+
+  const closeDeleteModal = (refresh: boolean) => {
+    if (refresh) {
+      updateList(current);
+    }
+    setDeleteOpen(false);
+  };
+
   return (
     <div className='App'>
       <div className='header'>
@@ -43,10 +78,27 @@ const App: React.FC = () => {
       <div>
         <Upload current={current}></Upload>
       </div>
-
-      {list.map((o) => {
-        return <div key={o.key}>{composition(o)({ object: o, current, updateList })}</div>;
-      })}
+      <div>
+        {list.map((o) => {
+          return (
+            <div className='object-container' key={o.key}>
+              <div>{composition(o)({ object: o, current, updateList })}</div>
+              <div>{o.isFile ? <button onClick={openDeleteModal(o.key)}>delete</button> : ''}</div>
+            </div>
+          );
+        })}
+      </div>
+      <Modal isOpen={deleteOpen} contentLabel='削除' style={customStyles}>
+        <Delete
+          targets={deleteTargets}
+          cancel={() => {
+            closeDeleteModal(false);
+          }}
+          afterDelete={() => {
+            closeDeleteModal(true);
+          }}
+        ></Delete>
+      </Modal>
     </div>
   );
 };

@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import icon from '../assets/refresh.svg';
+import React from 'react';
+//import icon from '../assets/refresh.svg';
 
 type RefreshProps = {
   updateList: (prefix?: string) => Promise<void>;
