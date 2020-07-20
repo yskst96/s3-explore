@@ -7,6 +7,7 @@ import { S3Object, composition } from './components/Composition';
 import { Upload } from './components/Upload';
 import { Refresh } from './components/Refresh';
 import { Delete } from './components/Delete';
+import { Breadcrumbs } from './components/Breadcrumbs';
 
 Modal.setAppElement('#root');
 const customStyles = {
@@ -71,8 +72,8 @@ const App: React.FC = () => {
 
   return (
     <div className='App'>
+      <Breadcrumbs current={current ? current : '/'} updateList={updateList}></Breadcrumbs>
       <div className='header'>
-        <div className='current-path'>current:{current ? current : '/'}</div>
         <Refresh updateList={updateList}></Refresh>
       </div>
       <div>

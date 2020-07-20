@@ -12,6 +12,9 @@ const s3 = new AWS.S3()
 const BUCKET = "yskst96-common"
 
 const s3list = async (prefix?: string) => {
+
+    if (prefix === '/') prefix = ''
+
     const res = await s3.listObjectsV2({ Bucket: BUCKET, Delimiter: "/", Prefix: prefix || "" }).promise()
 
     const contents = res.Contents

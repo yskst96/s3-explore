@@ -30,3 +30,16 @@
 .upload-form {
   display: none;
 }
+
+.breadcrumbs {
+  display: flex;
+  justify-content: center;
+}
+
+.breadcrumbs .link {
+  padding: 0 4px;
+}
+.breadcrumbs .link:hover {
+  color: aqua;
+  cursor: pointer;
+}
