@@ -79,7 +79,7 @@ const App: React.FC = () => {
       <div>
         <Upload current={current}></Upload>
       </div>
-      <div>
+      <div className='composition-container'>
         {list.map((o) => {
           return (
             <div className='object-container' key={o.key}>

@@ -1,3 +1,4 @@
+/* App */
 .App {
   text-align: center;
 }
@@ -8,38 +9,70 @@
 .current-path {
   margin: 1rem 0.5rem;
 }
-
+.composition-container {
+  background-color: #5a5b63;
+  width: 960px;
+  margin: 0 auto;
+  font-size: 1.5rem;
+}
 .object-container {
   display: flex;
-  justify-content: center;
+  justify-content: left;
+  padding-left: 40px;
   margin: 0.5rem 0;
+  transition: all 250ms;
+  text-align: left;
 }
+
+.object-container:hover {
+  background-color: #3e5fde;
+}
+
+/* Refresh */
 .refresh {
   margin: 1rem 0.5rem;
   cursor: pointer;
 }
-.refresh-icon {
-  vertical-align: bottom;
+
+/* Compositon */
+.composition {
+  color: #e6e8fc;
+}
+.composition:hover {
+  cursor: pointer;
 }
 
-.composition:hover {
-  color: aqua;
-  cursor: pointer;
+/* Folder */
+.folder-icon {
+  vertical-align: bottom;
+  width: 2rem;
+  margin-right: 4px;
+}
+
+/* File */
+.file-icon {
+  vertical-align: bottom;
+  width: 2rem;
+  margin-right: 4px;
 }
 
 .upload-form {
   display: none;
 }
 
+/* Breadcrumbs */
 .breadcrumbs {
   display: flex;
   justify-content: center;
+  font-size: 1.5rem;
+  color: #e6e8fc;
 }
 
 .breadcrumbs .link {
   padding: 0 4px;
+  transition: all 250ms;
 }
 .breadcrumbs .link:hover {
-  color: aqua;
+  color: #3e5fde;
   cursor: pointer;
 }
