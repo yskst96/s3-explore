@@ -75,10 +75,10 @@ const App: React.FC = () => {
       <Breadcrumbs current={current ? current : '/'} updateList={updateList}></Breadcrumbs>
       <div className='header'>
         <Refresh current={current} updateList={updateList}></Refresh>
-      </div>
-      <div>
+        <div className='space'></div>
         <Upload current={current}></Upload>
       </div>
+
       <div className='composition-container'>
         {list.map((o) => {
           return (

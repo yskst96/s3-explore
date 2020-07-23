@@ -1,5 +1,7 @@
 import React, { useRef } from 'react';
 import { s3put } from '../util/aws';
+import { Button } from './Button';
+import icon from '../assets/upload.svg';
 
 type UploadProp = {
   current: string;
@@ -43,7 +45,12 @@ const Upload: React.FC<UploadProp> = ({ current }) => {
 
   return (
     <div>
-      <button onClick={onClick}>upload</button>
+      <Button type='secondary' clickHandler={onClick}>
+        <div className='upload'>
+          Upload
+          {<img className='upload-icon' src={icon} alt='refresh' />}
+        </div>
+      </Button>
       <input id='upload-form' className='upload-form' type='file' onChange={upload} ref={inputRef} />
     </div>
   );

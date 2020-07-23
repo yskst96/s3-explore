@@ -1,5 +1,6 @@
 import React from 'react';
-//import icon from '../assets/refresh.svg';
+import { Button } from './Button';
+import icon from '../assets/refresh.svg';
 
 type RefreshProps = {
   current: string;
@@ -8,15 +9,17 @@ type RefreshProps = {
 
 const Refresh: React.FC<RefreshProps> = ({ current, updateList }) => {
   return (
-    <div
-      className='refresh'
-      onClick={async () => {
-        await updateList(current);
+    <Button
+      type='primary'
+      clickHandler={() => {
+        updateList(current);
       }}
     >
-      Refresh
-      {/* <img className='refresh-icon' src={icon} alt='' /> */}
-    </div>
+      <div className='refresh'>
+        Refresh
+        {<img className='refresh-icon' src={icon} alt='refresh' />}
+      </div>
+    </Button>
   );
 };
 
