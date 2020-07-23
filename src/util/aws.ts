@@ -9,7 +9,9 @@ AWS.config.update(config)
 
 const s3 = new AWS.S3()
 
-const BUCKET = "yskst96-common"
+const BUCKET = process.env.REACT_APP_BUCKET_NAME
+
+if (!BUCKET) throw Error('bucket is not specified')
 
 const s3list = async (prefix?: string) => {
 

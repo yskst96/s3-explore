@@ -5,7 +5,7 @@ type DeleteProps = {
 };
 
 const Breadcrumbs: React.FC<DeleteProps> = ({ current, updateList }) => {
-  const pathList = ['/', ...current.split('/')].filter((p) => p !== '');
+  const pathList = [process.env.REACT_APP_BUCKET_NAME, ...current.split('/')].filter((p) => p !== '');
 
   console.log(pathList);
 
