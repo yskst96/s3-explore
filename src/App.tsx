@@ -74,7 +74,7 @@ const App: React.FC = () => {
     <div className='App'>
       <Breadcrumbs current={current ? current : '/'} updateList={updateList}></Breadcrumbs>
       <div className='header'>
-        <Refresh updateList={updateList}></Refresh>
+        <Refresh current={current} updateList={updateList}></Refresh>
       </div>
       <div>
         <Upload current={current}></Upload>
