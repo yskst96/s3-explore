@@ -20,3 +20,10 @@
 ### uncommited
 
 - router 対応
+
+## 環境変数
+
+PORT:ポート
+REACT_APP_KEY_ID:AWS の AccessKeyID
+REACT_APP_SECRET_KEY:AWS の secret key S3 へのアクセス権限が必要
+REACT_APP_BUCKET_NAME:S3 バケット
