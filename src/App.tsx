@@ -74,7 +74,7 @@ const App: React.FC = () => {
       <div className='header'>
         <Refresh current={current} updateList={updateList}></Refresh>
         <div className='space'></div>
-        <Upload current={current}></Upload>
+        <Upload current={current} updateList={updateList}></Upload>
       </div>
 
       <div className='composition-container'>

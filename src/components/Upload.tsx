@@ -5,9 +5,10 @@ import icon from '../assets/upload.svg';
 
 type UploadProp = {
   current: string;
+  updateList: (prefix: string) => Promise<void>;
 };
 
-const Upload: React.FC<UploadProp> = ({ current }) => {
+const Upload: React.FC<UploadProp> = ({ current, updateList }) => {
   const inputRef = useRef<HTMLInputElement>(null);
   const onClick = () => {
     const input = inputRef.current;
@@ -27,12 +28,14 @@ const Upload: React.FC<UploadProp> = ({ current }) => {
 
     const reader = new FileReader();
 
-    reader.onload = (event: ProgressEvent<FileReader>) => {
+    reader.onload = async (event: ProgressEvent<FileReader>) => {
       const r = event.target?.result;
 
       if (typeof r === 'string' || !r) return;
 
-      s3put(file.name, new Uint8Array(r));
+      await s3put(current + file.name, new Uint8Array(r));
+
+      await updateList(current);
     };
 
     reader.onerror = (event: ProgressEvent<FileReader>) => {
