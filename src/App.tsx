@@ -56,11 +56,9 @@ const App: React.FC = () => {
   const [deleteTargets, setDeleteTargets] = useState([] as Array<string>);
 
   const openDeleteModal = (target: string) => {
-    return () => {
-      setDeleteTargets([target]);
-      setDeleteOpen(true);
-      console.log('delete open');
-    };
+    setDeleteTargets([target]);
+    setDeleteOpen(true);
+    console.log('delete open');
   };
 
   const closeDeleteModal = (refresh: boolean) => {
@@ -83,8 +81,7 @@ const App: React.FC = () => {
         {list.map((o) => {
           return (
             <div className='object-container' key={o.key}>
-              <div>{composition(o)({ object: o, current, updateList })}</div>
-              <div>{o.isFile ? <button onClick={openDeleteModal(o.key)}>delete</button> : ''}</div>
+              <div>{composition(o)({ object: o, current, updateList, openDeleteModal })}</div>
             </div>
           );
         })}

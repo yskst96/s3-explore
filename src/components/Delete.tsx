@@ -1,5 +1,6 @@
 import React from 'react';
 import { s3delete } from '../util/aws';
+import { Button } from '../components/Button';
 
 type DeleteProps = {
   targets: Array<string>;
@@ -16,12 +17,16 @@ const Delete: React.FC<DeleteProps> = ({ targets, afterDelete, cancel }) => {
   };
 
   return (
-    <div>
+    <div className='delete-confirm'>
       <div>以下のファイルを削除してよろしいですか？</div>
       <div>{targets.join('\n')}</div>
-      <div>
-        <button onClick={deleteObject}>はい</button>
-        <button onClick={cancel}>キャンセル</button>
+      <div className='confirm-button'>
+        <Button type='primary' clickHandler={deleteObject}>
+          はい
+        </Button>
+        <Button type='primary' clickHandler={cancel}>
+          キャンセル
+        </Button>
       </div>
     </div>
   );

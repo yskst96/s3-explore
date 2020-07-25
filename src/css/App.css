@@ -6,7 +6,7 @@
   display: flex;
   justify-content: center;
   width: 960px;
-  margin: 0 auto;
+  margin: 24px auto;
 }
 
 .current-path {
@@ -15,7 +15,7 @@
 .composition-container {
   background-color: #5a5b63;
   width: 960px;
-  margin: 0 auto;
+  margin: 24px auto;
   font-size: 1.5rem;
 }
 .object-container {
@@ -29,6 +29,13 @@
 
 .object-container:hover {
   background-color: #3e5fde;
+}
+
+.delete-icon {
+  cursor: pointer;
+  vertical-align: bottom;
+  width: 2rem;
+  margin-left: 36px;
 }
 
 .space {
@@ -102,11 +109,12 @@
   justify-content: center;
   font-size: 1.5rem;
   color: #e6e8fc;
+  margin: 24px auto;
 }
 
 .breadcrumbs .link {
   padding: 0 4px;
-  transition: all 250ms;
+  transition: all 200ms;
 }
 .breadcrumbs .link:hover {
   color: #3e5fde;
@@ -118,4 +126,15 @@
   vertical-align: bottom;
   width: 2rem;
   margin-left: 4px;
+}
+
+/* Delete */
+.delete-confirm {
+  font-size: 1.3rem;
+}
+
+.confirm-button {
+  margin-top: 24px;
+  display: flex;
+  justify-content: space-evenly;
 }
