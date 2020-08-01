@@ -13,7 +13,7 @@ RUN npm run build
 CMD [ "npm", "run", "start" ]
 
 # 実行コマンド
-# docker run --rm --name s3-ex -d -p 4000:4000 --env-file .env -it s3-ex
+# docker run --rm --name s3-ex(コンテナ名) -d -p 4000:4000 --env-file .env -it s3-ex
 
 # envファイル
 # PORT=4000

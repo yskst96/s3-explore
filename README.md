@@ -2,25 +2,19 @@
 
 ## 機能
 
-### DONE
-
 - ファイル参照
 - ファイルアップロード
 - ファイルダウンロード
-- リフレッシュ
 - ファイル削除
-- パンくずリスト
-- 共通コンポーネント化(ボタンとか)
-- デザイン
 - コンテナ化
 
-### uncommited
+## 使い方
 
-- router 対応
+以下の環境変数を定義した.env ファイルを PRJ ルートに作成し、アプリを実行(npm run build, npm run start)する
+コンテナとして実行する場合は Dockerfile のコメント参照。イメージは dockerhub にプッシュしていないので自前で build する必要がある。
+**どこかにホスティングしてインターネット公開しないよう注意**
 
-## 環境変数
-
-PORT:ポート
-REACT_APP_KEY_ID:AWS の AccessKeyID
-REACT_APP_SECRET_KEY:AWS の secret key S3 へのアクセス権限が必要
-REACT_APP_BUCKET_NAME:S3 バケット
+- PORT:ポート(4000)
+- REACT_APP_KEY_ID:AWS の AccessKeyID
+- REACT_APP_SECRET_KEY:AWS の secret key S3 へのアクセス権限が必要
+- REACT_APP_BUCKET_NAME:S3 バケット名
