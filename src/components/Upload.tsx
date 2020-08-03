@@ -54,7 +54,7 @@ const Upload: React.FC<UploadProp> = ({ current, updateList }) => {
           {<img className='upload-icon' src={icon} alt='refresh' />}
         </div>
       </Button>
-      <input id='upload-form' className='upload-form' type='file' onChange={upload} ref={inputRef} />
+      <input id='upload-form' className='upload-form' type='file' multiple onChange={upload} ref={inputRef} />
     </div>
   );
 };
