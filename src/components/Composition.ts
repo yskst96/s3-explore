@@ -5,6 +5,7 @@ export type S3Object = {
     key: string
     isFile: boolean
     size?: number
+    lastModified?: string
 }
 export type CompositionProps = {
     object: S3Object

@@ -1,4 +1,5 @@
 import AWS from "aws-sdk"
+import dayjs from 'dayjs'
 import { S3Object } from "../components/Composition";
 
 const config = new AWS.Config(
@@ -22,6 +23,8 @@ const s3list = async (prefix?: string) => {
     const contents = res.Contents
     const prefixes = res.CommonPrefixes
 
+    console.log(contents);
+
     if (!contents || !prefixes) {
         return []
     }
@@ -34,7 +37,7 @@ const s3list = async (prefix?: string) => {
 
         if (c.Key === prefix) continue
 
-        objects.push({ key: c.Key, isFile: true, size: c.Size })
+        objects.push({ key: c.Key, isFile: true, size: c.Size, lastModified: dayjs(c.LastModified).format('YYYY年MM月DD日 hh時mm分') })
     }
 
     for (let p of prefixes) {

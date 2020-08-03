@@ -21,12 +21,12 @@ const File: React.FC<CompositionProps> = ({ object, current, openDeleteModal }) 
         <img
           className='delete-icon'
           onClick={() => {
-            console.log('bb');
             openDeleteModal(object.key);
           }}
           src={deleteIcon}
           alt='delete'
         />
+        <div className='last-modified'>最終更新:{object.lastModified}</div>
       </div>
     </div>
   );
