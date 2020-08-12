@@ -37,7 +37,7 @@ const s3list = async (prefix?: string) => {
 
         if (c.Key === prefix) continue
 
-        objects.push({ key: c.Key, isFile: true, size: c.Size, lastModified: dayjs(c.LastModified).format('YYYY年MM月DD日 hh時mm分') })
+        objects.push({ key: c.Key, isFile: true, size: c.Size, lastModified: dayjs(c.LastModified).format('YYYY年MM月DD日 HH時mm分') })
     }
 
     for (let p of prefixes) {
