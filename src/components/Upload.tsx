@@ -24,26 +24,25 @@ const Upload: React.FC<UploadProp> = ({ current, updateList }) => {
 
     if (!files) return;
 
-    const file = files[0];
+    for (const file of Array.from(files)) {
+      const reader = new FileReader();
+      reader.onload = async (event: ProgressEvent<FileReader>) => {
+        const r = event.target?.result;
 
-    const reader = new FileReader();
+        if (typeof r === 'string' || !r) return;
 
-    reader.onload = async (event: ProgressEvent<FileReader>) => {
-      const r = event.target?.result;
+        await s3put(current + file.name, new Uint8Array(r));
 
-      if (typeof r === 'string' || !r) return;
+        await updateList(current);
+      };
 
-      await s3put(current + file.name, new Uint8Array(r));
+      reader.onerror = (event: ProgressEvent<FileReader>) => {
+        console.log('ERR', event.target?.error);
+        alert(`アップロードに失敗しました:${file.name}`);
+      };
 
-      await updateList(current);
-    };
-
-    reader.onerror = (event: ProgressEvent<FileReader>) => {
-      console.log('ERR', event.target?.error);
-      alert('アップロードに失敗しました');
-    };
-
-    reader.readAsArrayBuffer(file);
+      reader.readAsArrayBuffer(file);
+    }
   };
 
   return (
