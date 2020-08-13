@@ -18,6 +18,11 @@
   margin: 24px auto;
   font-size: 1.5rem;
 }
+
+.composition-container.drag-over {
+  background-color: #767781;
+}
+
 .object-container {
   display: flex;
   justify-content: left;

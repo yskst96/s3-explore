@@ -23,11 +23,12 @@ const customStyles = {
     backgroundColor: 'rgba(0,0,0,.5)',
   },
 };
-
+let i = 0;
 const App: React.FC = () => {
   const [list, setList] = useState([] as S3Object[]);
   const [current, setCurrent] = useState('');
 
+  //ファイル一覧更新
   const updateList = async (prefix?: string) => {
     prefix = prefix || '';
 
@@ -36,6 +37,7 @@ const App: React.FC = () => {
     setCurrent(prefix);
   };
 
+  // 副作用(初期処理)
   useEffect(() => {
     let unmounted = false;
 
@@ -55,6 +57,7 @@ const App: React.FC = () => {
   const [deleteOpen, setDeleteOpen] = useState(false);
   const [deleteTargets, setDeleteTargets] = useState([] as Array<string>);
 
+  // モーダル
   const openDeleteModal = (target: string) => {
     setDeleteTargets([target]);
     setDeleteOpen(true);
@@ -68,6 +71,41 @@ const App: React.FC = () => {
     setDeleteOpen(false);
   };
 
+  // ドラッグ処理
+  const [dragOver, setDragOver] = useState(false);
+
+  const onDrop = (e: React.DragEvent<HTMLDivElement>) => {
+    e.stopPropagation();
+    e.preventDefault();
+    const files = e.dataTransfer.files;
+
+    if (!files) return;
+
+    console.log(files[0].name);
+    i = 0;
+    setDragOver(false);
+  };
+
+  const onDragEnter = (e: React.DragEvent<HTMLDivElement>) => {
+    e.stopPropagation();
+    e.preventDefault();
+    ++i;
+
+    if (!dragOver) setDragOver(true);
+  };
+
+  const onDragLeave = (e: React.DragEvent<HTMLDivElement>) => {
+    e.stopPropagation();
+    e.preventDefault();
+    --i;
+
+    if (dragOver && i === 0) setDragOver(false);
+  };
+  const onDragOver = (e: React.DragEvent<HTMLDivElement>) => {
+    e.stopPropagation();
+    e.preventDefault();
+  };
+
   return (
     <div className='App'>
       <Breadcrumbs current={current ? current : '/'} updateList={updateList}></Breadcrumbs>
@@ -77,7 +115,7 @@ const App: React.FC = () => {
         <Upload current={current} updateList={updateList}></Upload>
       </div>
 
-      <div className='composition-container'>
+      <div className={['composition-container', dragOver ? 'drag-over' : ''].join(' ')} onDrop={onDrop} onDragEnter={onDragEnter} onDragLeave={onDragLeave} onDragOver={onDragOver}>
         {list.map((o) => {
           return (
             <div className='object-container' key={o.key}>

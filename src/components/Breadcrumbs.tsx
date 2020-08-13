@@ -7,8 +7,6 @@ type DeleteProps = {
 const Breadcrumbs: React.FC<DeleteProps> = ({ current, updateList }) => {
   const pathList = [process.env.REACT_APP_BUCKET_NAME, ...current.split('/')].filter((p) => p !== '');
 
-  console.log(pathList);
-
   const moveTo = async (i: number) => {
     if (i === 0) {
       await updateList();
