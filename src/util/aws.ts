@@ -23,12 +23,12 @@ const s3list = async (prefix?: string) => {
     const contents = res.Contents
     const prefixes = res.CommonPrefixes
 
-    console.log(contents);
+    // console.log(contents);
 
     if (!contents || !prefixes) {
         return []
     }
-    console.log(res);
+    //    console.log(res);
 
     const objects: S3Object[] = []
 
@@ -47,7 +47,7 @@ const s3list = async (prefix?: string) => {
         objects.push({ key: p.Prefix, isFile: false })
     }
 
-    console.log(objects);
+    //    console.log(objects);
 
     return objects
 
