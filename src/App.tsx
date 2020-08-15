@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Modal from 'react-modal';
 import './css/App.css';
 
-import { s3list } from './util/aws';
+import { s3list, s3put } from './util/aws';
 import { S3Object, composition } from './components/Composition';
 import { Upload } from './components/Upload';
 import { Refresh } from './components/Refresh';
@@ -81,7 +81,26 @@ const App: React.FC = () => {
 
     if (!files) return;
 
-    console.log(files[0].name);
+    for (const file of Array.from(files)) {
+      const reader = new FileReader();
+      reader.onload = async (event: ProgressEvent<FileReader>) => {
+        const r = event.target?.result;
+
+        if (typeof r === 'string' || !r) return;
+
+        await s3put(current + file.name, new Uint8Array(r));
+
+        await updateList(current);
+      };
+
+      reader.onerror = (event: ProgressEvent<FileReader>) => {
+        console.log('ERR', event.target?.error);
+        alert(`アップロードに失敗しました:${file.name}`);
+      };
+
+      reader.readAsArrayBuffer(file);
+    }
+
     i = 0;
     setDragOver(false);
   };
@@ -101,6 +120,7 @@ const App: React.FC = () => {
 
     if (dragOver && i === 0) setDragOver(false);
   };
+
   const onDragOver = (e: React.DragEvent<HTMLDivElement>) => {
     e.stopPropagation();
     e.preventDefault();
