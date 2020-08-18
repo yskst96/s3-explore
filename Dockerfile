@@ -22,4 +22,4 @@ CMD [ "npm", "run", "start" ]
 
 # 実行コマンド
 # docker build ./ -t s3-ex(コンテナ名)
-# docker run --rm --name s3-ex(コンテナ名) -d -p 4000:4000 --env-file .env -it s3-ex
+# docker run --rm --name s3-ex(コンテナ名) -d -p 4000:4000 --env-file .env --restart=always -it s3-ex
