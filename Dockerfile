@@ -20,6 +20,8 @@ CMD [ "npm", "run", "start" ]
 # REACT_APP_BUCKET_NAME=<対象バケット名>
 
 
-# 実行コマンド
-# docker build ./ -t s3-ex(コンテナ名)
-# docker run --rm --name s3-ex(コンテナ名) -d -p 4000:4000 --env-file .env --restart=always -it s3-ex
+# ビルド用
+# docker build ./ -t s3-ex
+
+#実行用
+# docker run --name s3-ex -d -p 4000:4000 --env-file .env --restart=always -it s3-ex
