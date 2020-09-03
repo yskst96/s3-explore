@@ -6,9 +6,10 @@ import icon from '../assets/upload.svg';
 type UploadProp = {
   current: string;
   updateList: (prefix: string) => Promise<void>;
+  onUploadComlate: () => void;
 };
 
-const Upload: React.FC<UploadProp> = ({ current, updateList }) => {
+const Upload: React.FC<UploadProp> = ({ current, updateList, onUploadComlate }) => {
   const inputRef = useRef<HTMLInputElement>(null);
   const onClick = () => {
     const input = inputRef.current;
@@ -34,6 +35,7 @@ const Upload: React.FC<UploadProp> = ({ current, updateList }) => {
         await s3put(current + file.name, new Uint8Array(r));
 
         await updateList(current);
+        onUploadComlate();
       };
 
       reader.onerror = (event: ProgressEvent<FileReader>) => {

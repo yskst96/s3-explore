@@ -8,6 +8,7 @@ import { Upload } from './components/Upload';
 import { Refresh } from './components/Refresh';
 import { Delete } from './components/Delete';
 import { Breadcrumbs } from './components/Breadcrumbs';
+import { Snackbar, SnackbarContent } from '@material-ui/core';
 
 Modal.setAppElement('#root');
 const customStyles = {
@@ -27,6 +28,9 @@ let i = 0;
 const App: React.FC = () => {
   const [list, setList] = useState([] as S3Object[]);
   const [current, setCurrent] = useState('');
+
+  // SnackBar
+  const [snackBarOpen, setSnackBar] = useState(false);
 
   //ファイル一覧更新
   const updateList = async (prefix?: string) => {
@@ -91,6 +95,8 @@ const App: React.FC = () => {
         await s3put(current + file.name, new Uint8Array(r));
 
         await updateList(current);
+
+        setSnackBar(true);
       };
 
       reader.onerror = (event: ProgressEvent<FileReader>) => {
@@ -132,7 +138,7 @@ const App: React.FC = () => {
       <div className='header'>
         <Refresh current={current} updateList={updateList}></Refresh>
         <div className='space'></div>
-        <Upload current={current} updateList={updateList}></Upload>
+        <Upload current={current} updateList={updateList} onUploadComlate={() => setSnackBar(true)}></Upload>
       </div>
 
       <div className={['composition-container', dragOver ? 'drag-over' : ''].join(' ')} onDrop={onDrop} onDragEnter={onDragEnter} onDragLeave={onDragLeave} onDragOver={onDragOver}>
@@ -144,6 +150,17 @@ const App: React.FC = () => {
           );
         })}
       </div>
+      <Snackbar
+        anchorOrigin={{
+          vertical: 'bottom',
+          horizontal: 'center',
+        }}
+        open={snackBarOpen}
+        onClose={() => setSnackBar(false)}
+        autoHideDuration={3000}
+      >
+        <SnackbarContent message={'アップロードが完了しました！'} style={{ backgroundColor: '#3e5fde' }} />
+      </Snackbar>
       <Modal isOpen={deleteOpen} contentLabel='削除' style={customStyles}>
         <Delete
           targets={deleteTargets}

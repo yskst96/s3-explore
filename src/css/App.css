@@ -146,3 +146,8 @@
   display: flex;
   justify-content: space-evenly;
 }
+
+/* materialUIのグローバルclass*/
+.MuiSnackbarContent-root {
+  background-color: red;
+}
